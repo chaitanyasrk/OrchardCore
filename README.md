@@ -38,8 +38,12 @@ To enhance the landing page performance, the following modifications have been i
 Included are MiniProfiler snapshots highlighting the potential bottlenecks before and after the aforementioned optimizations:
 
 1. **Before Optimization**:
-   - [Document Attached] - Illustrates performance metrics prior to enhancements.
-2. **After Optimization**:
-   - [Document Attached] - Demonstrates improved performance metrics following the application of optimizations.
+   - The below report illustrates performance metrics prior to enhancements.
+   ![image](https://github.com/chaitanyasrk/OrchardCore/assets/53580000/c33467c6-9af1-456f-aa53-83201bf1bb12)
 
-Please review the attached documents for a detailed analysis of the performance improvements.
+2. **After Optimization**:
+   - The below report demonstrates improved performance metrics following the application of optimizations.
+     ![image](https://github.com/chaitanyasrk/OrchardCore/assets/53580000/404ac58c-df62-495b-a4fe-594c7dcda0ec)
+
+
+Please look at the attached report for a detailed analysis of the performance improvements.
