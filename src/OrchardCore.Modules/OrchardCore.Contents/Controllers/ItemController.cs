@@ -39,7 +39,7 @@ namespace OrchardCore.Contents.Controllers
             {
                 var cacheKey = GetCacheKey(contentItemId);
 
-                if(!_memoryCache.TryGetValue(cacheKey, out ContentItem contentItem))
+                if (!_memoryCache.TryGetValue(cacheKey, out ContentItem contentItem))
                 {
                     contentItem = await _contentManager.GetAsync(contentItemId, jsonPath);
                 }

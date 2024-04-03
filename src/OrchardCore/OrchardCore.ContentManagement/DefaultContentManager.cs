@@ -886,6 +886,7 @@ namespace OrchardCore.ContentManagement
             }
 
             await ReversedHandlers.InvokeAsync((handler, context) => handler.RemovedAsync(context), context, _logger);
+            await _signal.SignalTokenAsync(GetSignalName(contentItem.ContentItemId));
         }
 
         public async Task DiscardDraftAsync(ContentItem contentItem)
