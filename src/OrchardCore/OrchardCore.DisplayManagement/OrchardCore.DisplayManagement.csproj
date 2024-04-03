@@ -13,7 +13,11 @@
   <ItemGroup>
     <FrameworkReference Include="Microsoft.AspNetCore.App" />
   </ItemGroup>
-
+  
+  <ItemGroup>
+    <PackageReference Include="MiniProfiler.AspNetCore.Mvc" />
+  </ItemGroup>
+  
   <ItemGroup>
     <ProjectReference Include="..\OrchardCore.Infrastructure.Abstractions\OrchardCore.Infrastructure.Abstractions.csproj" />
     <ProjectReference Include="..\OrchardCore.DisplayManagement.Abstractions\OrchardCore.DisplayManagement.Abstractions.csproj" />

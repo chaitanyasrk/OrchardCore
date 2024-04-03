@@ -12,6 +12,7 @@ using OrchardCore.ContentManagement.Metadata;
 using OrchardCore.ContentManagement.Metadata.Builders;
 using OrchardCore.ContentManagement.Metadata.Models;
 using OrchardCore.ContentManagement.Records;
+using OrchardCore.Environment.Cache;
 using OrchardCore.Modules;
 using YesSql;
 using YesSql.Services;
@@ -30,6 +31,7 @@ namespace OrchardCore.ContentManagement
         private readonly IContentManagerSession _contentManagerSession;
         private readonly IContentItemIdGenerator _idGenerator;
         private readonly IClock _clock;
+        private readonly ISignal _signal;
 
         public DefaultContentManager(
             IContentDefinitionManager contentDefinitionManager,
@@ -38,7 +40,8 @@ namespace OrchardCore.ContentManagement
             ISession session,
             IContentItemIdGenerator idGenerator,
             ILogger<DefaultContentManager> logger,
-            IClock clock)
+            IClock clock,
+            ISignal signal)
         {
             _contentDefinitionManager = contentDefinitionManager;
             Handlers = handlers;
@@ -48,6 +51,7 @@ namespace OrchardCore.ContentManagement
             _contentManagerSession = contentManagerSession;
             _logger = logger;
             _clock = clock;
+            _signal = signal;
         }
 
         public IEnumerable<IContentHandler> Handlers { get; private set; }
@@ -784,7 +788,8 @@ namespace OrchardCore.ContentManagement
             await Handlers.InvokeAsync((handler, context) => handler.UpdatingAsync(context), context, _logger);
 
             await _session.SaveAsync(contentItem);
-
+            // Invalidate the cache for the updated content item
+            await _signal.SignalTokenAsync(GetSignalName(contentItem.ContentItemId));
             await ReversedHandlers.InvokeAsync((handler, context) => handler.UpdatedAsync(context), context, _logger);
         }
 
@@ -1192,6 +1197,11 @@ namespace OrchardCore.ContentManagement
 
                 await ReversedHandlers.InvokeAsync((handler, context) => handler.RemovedAsync(context), removeContext, _logger);
             }
+        }
+
+        private string GetSignalName(string contentItemId)
+        {
+            return $"ContentItemDisplaySignal_{contentItemId}";
         }
     }
 }

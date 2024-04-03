@@ -209,10 +209,12 @@ namespace OrchardCore.Contents
             });
 
             services.AddTransient<IContentsAdminListFilterProvider, DefaultContentsAdminListFilterProvider>();
+            services.AddMiniProfiler();
         }
 
         public override void Configure(IApplicationBuilder builder, IEndpointRouteBuilder routes, IServiceProvider serviceProvider)
         {
+            builder.UseMiniProfiler();
             routes.AddGetContentEndpoint()
                 .AddCreateContentEndpoint()
                 .AddDeleteContentEndpoint();
