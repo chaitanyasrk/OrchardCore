@@ -77,6 +77,14 @@ namespace OrchardCore.ContentManagement.Records
                     "Latest")
             );
 
+            await SchemaBuilder.AlterIndexTableAsync<ContentItemIndex>(table => table
+                .CreateIndex("IDX_ContentItemIndex_DocumentId_Published",
+                    "DocumentId",
+                    "ContentItemId",
+                    "Published",
+                    "Latest")
+            );
+
             // Shortcut other migration steps on new content definition schemas.
             return 6;
         }
@@ -231,6 +239,14 @@ namespace OrchardCore.ContentManagement.Records
                     "Published",
                     "Latest")
             );
+
+            await SchemaBuilder.AlterIndexTableAsync<ContentItemIndex>(table => table
+               .CreateIndex("IDX_ContentItemIndex_DocumentId_Published",
+                   "DocumentId",
+                   "ContentItemId",
+                   "Published",
+                   "Latest")
+           );
 
             return 6;
         }

@@ -79,6 +79,12 @@ namespace OrchardCore.Users
                     "ClaimValue")
             );
 
+            await SchemaBuilder.AlterIndexTableAsync<UserIndex>(table => table
+                .CreateIndex("IDX_UserByUserIdIndex_DocumentId",
+                    "DocumentId",
+                    "UserId")
+            );
+
             // Shortcut other migration steps on new content definition schemas.
             return 13;
         }
