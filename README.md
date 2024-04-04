@@ -31,7 +31,7 @@ To enhance the landing page performance, the following modifications have been i
 5. **Cache Invalidity via ISignal**:
    - Employed `ISignal` event mechanism to automatically invalidate cache for specific content items upon their update or deletion by an admin.
 6. **GZip Compression**:
-   - Applied GZip compression to expedite the loading of views and related assets, enhancing the user experience.
+   - Applied GZip compression to expedite network traffic, speed up data transfer, and improve user experience.
 
 ## Profiling Reports
 
